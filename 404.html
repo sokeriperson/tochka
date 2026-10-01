@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Страница не найдена — Точка Доступа</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Style.css" />
+</head>
+<body>
+<script src="age-gate.js"></script>
+
+<nav class="nav">
+  <a href="index.html">главная</a>
+  <a href="galereya/5.html">галерея</a>
+  <a href="akcii/3.html">акции</a>
+  <a href="menu/4.html">меню</a>
+  <a href="vacancies/2.html">вакансии</a>
+  <a href="tel:88002228690" class="nav__phone">тел. 8 (800) 222 86 90</a>
+
+  <a href="tel:88002228690" class="nav__phone-icon" aria-label="Позвонить">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M7.3 11c1.5 2.9 3.9 5.3 6.8 6.8l1.9-1.9c.3-.3.7-.4 1.1-.3 1 .3 2.1.5 3.2.5.6 0 1 .4 1 1V20.5c0 .6-.4 1-1 1C10.4 21.5 2.5 13.6 2.5 4c0-.6.4-1 1-1H6.7c.6 0 1 .4 1 1 0 1.1.2 2.2.5 3.2.1.4 0 .8-.3 1.1L7.3 11Z" stroke="currentColor" stroke-width="1.4"/></svg>
+  </a>
+
+  <a href="index.html#booking" class="reserve-btn">
+    <img src="img/reserve1.svg" class="state-normal" alt="Забронировать">
+    <img src="img/reserve2.svg" class="state-hover" alt="">
+    <img src="img/reserve3.svg" class="state-active" alt="">
+  </a>
+
+  <button type="button" class="nav__burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-menu__nav">
+    <a href="index.html">главная</a>
+    <a href="galereya/5.html">галерея</a>
+    <a href="akcii/3.html">акции</a>
+    <a href="menu/4.html">меню</a>
+    <a href="vacancies/2.html">вакансии</a>
+    <a href="index.html#footer">контакты</a>
+  </nav>
+
+  <div class="mobile-menu__socials">
+    <a href="#" class="mobile-menu__soc" aria-label="Telegram">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M21 4 3 11.5l6 2m12-9.5-3 15-6-4.5m9-10.5-9 10.5m0 0-3-2" stroke="currentColor" stroke-width="1.4"/></svg>
+    </a>
+    <a href="#" class="mobile-menu__soc" aria-label="VK">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 9c.2 6 3.2 9.6 8.8 9.6h.9v-3.4c2 .2 3.5 1.7 4.1 3.4h3.1c-.8-2.9-2.9-4.5-4.2-5.1 1.3-.8 3.2-2.7 3.6-5.1h-2.9c-.6 2-2.3 3.9-4 4.1V3.4h-2.9v7.1c-1.7-.4-3-2.3-3.5-4.6H4Z" stroke="currentColor" stroke-width="1.2"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════ 404 ═══════════ -->
+<main class="notfound">
+  <div class="notfound__glow"></div>
+
+  <div class="notfound__content">
+    <p class="notfound__eyebrow">Точка Доступа</p>
+
+    <h1 class="notfound__code" data-text="404">404</h1>
+
+    <p class="notfound__title">Такой страницы<br>не существует</p>
+    <p class="notfound__sub">Похоже, вы свернули не туда. Проверьте адрес или вернитесь на главную.</p>
+
+    <div class="notfound__actions">
+      <a href="index.html" class="btn-reserve">На главную</a>
+      <a href="tel:88002228690" class="notfound__phone">или позвоните: 8 (800) 222 86 90</a>
+    </div>
+  </div>
+</main>
+
+<div class="mobile-bottombar" aria-label="Быстрые действия">
+  <div class="mobile-bottombar__left">
+    <button type="button" class="mobile-bottombar__btn mobile-bottombar__btn--top" id="scrollTopBtn" aria-label="Наверх">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 15l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <a href="location.html" class="mobile-bottombar__btn mobile-bottombar__btn--pin" aria-label="Как нас найти">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.2 7-12.5S16.4 2 12 2 5 4.6 5 9.5 12 22 12 22Z" fill="currentColor"/><circle cx="12" cy="9.5" r="2.6" fill="#000"/></svg>
+    </a>
+  </div>
+
+  <a href="https://3.redirect.appmetrica.yandex.com/route?end-lat=54.713824&end-lon=20.505520&ref=tochkadostupa"
+     class="mobile-bottombar__taxi" aria-label="Вызвать такси"></a>
+</div>
+
+<script src="Main.js"></script>
+</body>
+</html>

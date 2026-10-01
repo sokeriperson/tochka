@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Точка Доступа — Админ</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+<div id="loginBox" class="login">
+    <div class="login__card">
+        <p class="login__eyebrow">Точка Доступа</p>
+        <h1 class="login__title">Админ-панель</h1>
+
+        <div class="field">
+            <label class="field__label" for="email">Email</label>
+            <input type="email" id="email" class="field__input" placeholder="admin@tochka-club.ru" autocomplete="username" />
+        </div>
+
+        <div class="field">
+            <label class="field__label" for="password">Пароль</label>
+            <input type="password" id="password" class="field__input" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+
+        <button id="loginBtn" class="btn-primary">Войти</button>
+        <p id="loginError" class="login__error"></p>
+    </div>
+</div>
+
+<div id="panel" class="panel">
+
+    <header class="panel__header">
+        <div>
+            <p class="panel__eyebrow">Точка Доступа</p>
+            <h1 class="panel__title">Админ-панель</h1>
+        </div>
+        <button id="logoutBtn" class="btn-ghost">Выйти</button>
+    </header>
+
+    <nav class="tabs">
+        <button class="tabs__btn is-active" data-tab="reels">Рилсы</button>
+        <button class="tabs__btn" data-tab="gallery">Галерея</button>
+        <button class="tabs__btn" data-tab="bookings">Брони столиков</button>
+        <button class="tabs__btn" data-tab="vacancies">Вакансии</button>
+        <button class="tabs__btn" data-tab="menu">Меню</button>
+    </nav>
+
+    <section class="tab-panel is-active" id="tab-reels">
+        <div class="section__head">
+            <h2 class="section__title">Рилсы — главная страница</h2>
+        </div>
+
+
+        <div class="add-reel">
+            <div class="upload-grid">
+                <label class="upload-field">
+                    <span class="upload-field__label">Видео (mp4)</span>
+                    <input type="file" id="videoFile" accept="video/mp4,video/webm,video/quicktime" class="field__input" />
+                </label>
+                <label class="upload-field">
+                    <span class="upload-field__label">Обложка превью (jpg/png)</span>
+                    <input type="file" id="posterFile" accept="image/*" class="field__input" />
+                </label>
+                <label class="upload-field upload-field--sm">
+                    <span class="upload-field__label">Превью при наведении, сек</span>
+                    <input type="number" id="previewSec" min="1" max="30" value="5" class="field__input" />
+                </label>
+            </div>
+
+            <label class="upload-field" style="margin-bottom:14px;">
+                <span class="upload-field__label">Ссылка при клике (необязательно)</span>
+                <input type="url" id="newLink" class="field__input" placeholder="https://www.instagram.com/reel/..." />
+            </label>
+
+            <div class="upload-actions">
+                <button id="addBtn" class="btn-primary btn-primary--sm">Загрузить рил</button>
+                <button id="backfillPostersBtn" class="btn-ghost btn-primary--sm">Догенерировать обложки для старых</button>
+                <div class="progress" id="progress" hidden><div class="progress__bar" id="progressBar"></div></div>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="table" id="reelsTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Превью</th>
+                    <th>Ссылка</th>
+                    <th>Наведение</th>
+                    <th>Активен</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody id="reelsBody"></tbody>
+            </table>
+            <p class="table-empty" id="reelsEmpty" hidden>Пока нет добавленных рилсов</p>
+        </div>
+    </section>
+
+    <section class="tab-panel" id="tab-bookings">
+        <div class="section__head">
+            <h2 class="section__title">Заявки на бронирование <span id="bookingsCount" class="section__count"></span></h2>
+        </div>
+
+        <div class="table-wrap">
+            <table class="table" id="bookingsTable">
+                <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Имя</th>
+                    <th>Телефон</th>
+                    <th>Источник</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody id="bookingsBody"></tbody>
+            </table>
+            <p class="table-empty" id="bookingsEmpty" hidden>Пока нет заявок на бронь</p>
+        </div>
+    </section>
+
+    <section class="tab-panel" id="tab-vacancies">
+        <div class="section__head">
+            <h2 class="section__title">Отклики на вакансии <span id="vacanciesCount" class="section__count"></span></h2>
+        </div>
+
+        <div class="table-wrap">
+            <table class="table" id="vacanciesTable">
+                <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Имя</th>
+                    <th>Телефон</th>
+                    <th>Контакт</th>
+                    <th>Комментарий</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody id="vacanciesBody"></tbody>
+            </table>
+            <p class="table-empty" id="vacanciesEmpty" hidden>Пока нет откликов</p>
+        </div>
+    </section>
+
+    <section class="tab-panel" id="tab-gallery">
+        <div class="section__head">
+            <h2 class="section__title">Галерея — страница «Галерея»</h2>
+        </div>
+
+        <div class="add-reel">
+            <div class="upload-actions">
+                <label class="upload-field" style="flex:1;">
+                    <span class="upload-field__label">Фото (можно выбрать несколько)</span>
+                    <input type="file" id="galleryFile" accept="image/*" multiple class="field__input" />
+                </label>
+                <button id="galleryAddBtn" class="btn-primary btn-primary--sm">Загрузить</button>
+            </div>
+            <div class="progress" id="galleryProgress" hidden style="margin-top:12px;">
+                <div class="progress__bar" id="galleryProgressBar"></div>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="table" id="galleryTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Фото</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody id="galleryBody"></tbody>
+            </table>
+            <p class="table-empty" id="galleryEmpty" hidden>Пока нет фото</p>
+        </div>
+    </section>
+
+    <section class="tab-panel" id="tab-menu">
+        <div class="section__head">
+            <h2 class="section__title">Меню — страница «Меню»</h2>
+        </div>
+
+        <div class="add-reel">
+            <div class="upload-grid">
+                <label class="upload-field">
+                    <span class="upload-field__label">Название раздела</span>
+                    <input type="text" id="menuLabel" class="field__input" placeholder="Например: Виски" />
+                </label>
+                <label class="upload-field">
+                    <span class="upload-field__label">Общий объём (необязательно)</span>
+                    <input type="text" id="menuUnit" class="field__input" placeholder="50 мл" />
+                </label>
+                <label class="upload-field upload-field--sm">
+                    <span class="upload-field__label">Прайс-картинка (десктоп)</span>
+                    <input type="file" id="menuImage" accept="image/*" class="field__input" />
+                </label>
+            </div>
+
+
+            <label class="upload-field" style="margin-bottom:14px;">
+                <span class="upload-field__label">Вторая прайс-картинка (необязательно — включит стрелки-листалку)</span>
+                <input type="file" id="menuImage2" accept="image/*" class="field__input" />
+            </label>
+
+
+            <p class="menu-hint">
+                Картинку загружайте только для раздела, который должен стать <b>отдельной кнопкой</b> в десктопном меню.
+                Разделы без картинки прицепятся к предыдущей кнопке как подпункты.
+            </p>
+
+            <div class="upload-actions">
+                <button id="menuAddBtn" class="btn-primary btn-primary--sm">Добавить раздел</button>
+                <div class="progress" id="menuProgress" hidden><div class="progress__bar" id="menuProgressBar"></div></div>
+            </div>
+        </div>
+
+        <div id="menuList" class="menu-list"></div>
+        <p class="table-empty" id="menuEmpty" hidden>Пока нет разделов меню</p>
+    </section>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
